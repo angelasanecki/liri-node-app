@@ -6,6 +6,14 @@ var request = require("request");
 
 var spotify = require("spotify");
 
+//require the twitter library
+
+var Twitter = require("twitter");
+
+//requiring fs 
+
+var fs = require("fs");
+
 
 
 //Use Process.argv to see if the user entered "movie-this" as the first parameter
@@ -112,3 +120,60 @@ else if(process.argv[2] === "spotify-this-song")
 
 
 
+else if(process.argv[2] === "my-tweets")
+
+
+{   
+
+	//Grabbing the bucket of values in keys.js
+
+	var bucketofValues = require("./keys.js");
+
+
+	var keys = bucketofValues.twitterKeys;
+
+
+	  var client = new Twitter(keys);
+ 
+var params = {screen_name: 'angie_g_san'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets[0].text);
+    // console.log(response);
+    // console.log(response.text);
+    // console.log(tweets.text)
+  }
+});
+
+// https://apps.twitter.com/app/13629185/keys
+
+// https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=angie_g_san 
+
+		// consumer_key: 'ozsvGBQZKayjjwXjbAHj6CIA9',
+  // 		consumer_secret: 'mm8PoWTH0nbA67py7QyasvePGFEVroMjA0uhrOqwVHD2ZlWieu',
+  // 		access_token_key: '849426726371414021-ERnGAH2HA3izxZRGGG8TKGXYEDktU6E',
+  // 		access_token_secret: 'iUQcvR3f9R8Snlnc4CRqOjzRhqkyqi5hrb6kPcdBVZEyF'
+
+
+
+
+
+
+
+}
+
+
+
+else if(process.argv[2] === "do-what-it-says")
+
+{
+     
+
+     fs.readFile("random.txt", "utf8", function(error, data){
+
+     
+     	console.log(data);
+     });
+
+
+}
