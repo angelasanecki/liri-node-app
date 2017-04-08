@@ -15,6 +15,9 @@ var Twitter = require("twitter");
 var fs = require("fs");
 
 
+var stringArray;
+
+
 
 //Use Process.argv to see if the user entered "movie-this" as the first parameter
 
@@ -146,10 +149,31 @@ else if(process.argv[2] === "my-tweets")
 var params = {screen_name: 'angie_g_san'};
 client.get('statuses/user_timeline', params, function(error, tweets, response) {
   if (!error) {
-    console.log(tweets[0].text);
-    // console.log(response);
-    // console.log(response.text);
-    // console.log(tweets.text)
+
+          if (tweets.length < 20){
+
+              for(i= 0; i< tweets.length; i++) {
+
+
+              console.log("tweet: " + tweets[i].text);
+              console.log("created: " + tweets[i].created_at);
+                    }
+
+                }
+
+            else {
+
+          for (i= 0; i < 20; i++) {
+
+          console.log("tweet: " + tweets[i].text);
+          console.log("created: " + tweets[i].created_at);
+          // console.log(response);
+            // console.log(response.text);
+
+              }
+
+              }
+
   }
 });
 
@@ -174,8 +198,23 @@ else if(process.argv[2] === "do-what-it-says")
 
      fs.readFile("random.txt", "utf8", function(error, data){
 
-     
-      console.log(data);
+      stringArray = data.split(',');
+
+
+      // console.log(stringArray);
+      // console.log (stringArray[1]);
+
+      if (stringArray[0] === "spotify-this-song")
+
+          {
+
+            songFunction(stringArray[1]);
+
+          }
+
+
+
+      // console.log(data);
      });
 
 
